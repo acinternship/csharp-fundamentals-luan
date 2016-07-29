@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Test", "src\Test\Test.xproj", "{7B8D2FC3-DC29-4B9C-9037-D472312A1AE0}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OdToFood", "src\Test\OdToFood.xproj", "{7B8D2FC3-DC29-4B9C-9037-D472312A1AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
