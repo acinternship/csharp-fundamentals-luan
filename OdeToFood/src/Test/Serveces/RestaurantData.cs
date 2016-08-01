@@ -1,31 +1,43 @@
-﻿using System.Collections.Generic;
-using Test.Models;
-
+﻿using Test.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Test.Serveces
 {
     public interface IRestaurantData
     {
         IEnumerable<Restaurant> GetAll();
+        Restaurant Get(int id);
+        void Add(Restaurant newRestaurant);
     }
 
     public class InMemoryRestaurantData : IRestaurantData
     {
-        public InMemoryRestaurantData()
+        static InMemoryRestaurantData()
         {
-            _restaurants = new List<Restaurant>
+            _restaurants = new List<Restaurant>      
             {
                 new Restaurant {Id = 1, Name = "Tersiguel's" },
                 new Restaurant {Id = 2, Name = "LJ's and the Kat" },
-                new Restaurant {Id = 1, Name = "King's Contrivence" }
+                new Restaurant {Id = 3, Name = "King's Contrivence" }
             };
         }
-
-        public IEnumerable<Restaurant> GetAll()
+        public void Add(Restaurant newRestaurant)
         {
-            return null;
+            newRestaurant.Id = _restaurants.Max(r => r.Id) + 1;
+            _restaurants.Add(newRestaurant);
+
         }
 
-        List<Restaurant> _restaurants;
+        public Restaurant Get(int id)
+        {
+           return _restaurants.FirstOrDefault(r => r.Id == id);
+        }
+        public IEnumerable<Restaurant> GetAll()
+        {
+            return _restaurants;
+        }
+
+        static List<Restaurant> _restaurants;
     }
 }

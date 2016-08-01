@@ -65,14 +65,16 @@ namespace Test
         {
             //Home/Index/
             routeBuilder.MapRoute("Default",
-                "{controller=Home}/{action=Index}/{id}");
+                "{controller=Home}/{action=Index}/{id?}");
             
 
         }
 
-        private void ConfigureRoute(IRoutteBbuilder routeBuider)
+        
+        //Entry point for the application.
+        /*public static void Main(string[] args) => WebApplication.Run<Startup>
         {
 
-        }
+        }*/
     }
 }
