@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Test.Serveces;
+using Test.Entities;
+using Microsoft.Data.Entity;
 
 namespace Test
 {
@@ -31,9 +33,13 @@ namespace Test
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddEntityFramework()
+                    .AddSqlServer()
+                    .AddDbContext<TestDbContext>(options => options.UseSqlServer(Configuration["Datavase:connection"]))
+
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
-            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

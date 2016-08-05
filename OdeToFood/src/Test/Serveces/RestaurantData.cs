@@ -1,6 +1,7 @@
 ﻿using Test.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Test.Serveces
 {
@@ -9,6 +10,32 @@ namespace Test.Serveces
         IEnumerable<Restaurant> GetAll();
         Restaurant Get(int id);
         void Add(Restaurant newRestaurant);
+    }
+
+    public class SqlRestaurantData : IRestaurantData
+    {
+        private TestDbContext _context;
+
+        public SqlRestaurantData(TestDbContext context)
+        {
+            _context = context;
+        }
+
+        public void Add(Restaurant newRestaurant)
+        {
+            _context.Add(newRestaurant);
+            _context.SaveChanges();
+        }
+
+        public Restaurant Get(int id)
+        {
+           return _context.Restaurants.FirstOrDefault(r => r.Id == id);
+        }
+
+        public IEnumerable<Restaurant> GetAll()
+        {
+            return _context.Restaurants.ToList();
+        }
     }
 
     public class InMemoryRestaurantData : IRestaurantData
@@ -41,3 +68,4 @@ namespace Test.Serveces
         static List<Restaurant> _restaurants;
     }
 }
+
