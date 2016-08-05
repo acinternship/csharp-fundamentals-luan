@@ -1,23 +1,18 @@
-﻿@model List<Blog.Models.BlogPost>
+﻿@model Blog.Models.BlogPost
 
-<h1>Posts</h1>
 
-@foreach (var item in Model)
-{
+
+<form method="post">
     <div>
-        <h3>@item.Title - @item.CreatedAt</h3>
-
-        <div>
-            @item.Content
-        </div>
-
-    </div>
-}
-<form asp-controller="Post" asp-action="Create">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+     </div>
+     <div>
+         <label asp-for="Content"></label>
+         <textarea cols="50" rows="5" asp-for="Content"></textarea>
+     </div>
     <div>
-        <label> asp-for="Title"></label>
-        <input> asp-for="Title" />
-
+        <input type="submit" value="Save" />
     </div>
 </form>
 
