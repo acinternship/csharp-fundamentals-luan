@@ -10,6 +10,6 @@ namespace Blog.Models
         public int Id { get; set; }
         public String Title { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string Content { get; internal set; }
+        public string Content { get; set; }
     }   
 }

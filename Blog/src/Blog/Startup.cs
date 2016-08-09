@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Blog.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog
 {
@@ -37,6 +39,8 @@ namespace Blog
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+            services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(Configuration["Database:connection"]));
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

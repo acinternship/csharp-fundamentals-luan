@@ -8,7 +8,7 @@ namespace Fibonacci
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void main()
         {
            
             int value2 = FibonacciSequence();
@@ -79,6 +79,7 @@ namespace Fibonacci
             num = 0;
             fibonacci_num = 1;
 
+            //Fibonacci Calculus 
             for (j = 2; j <= value1; j++)
             {
                 aux_count = num;
@@ -86,16 +87,12 @@ namespace Fibonacci
                 fibonacci_num = aux_count + fibonacci_num;
             }
 
-           
-
             if (value1 == j)
                 {
-                    Console.Write(value1);
-                    Console.Write("   ");
-                    Console.WriteLine(fibonacci_num);
-
+                return fibonacci_num;      
                 }
-            }
+            
+         }
          
         }
         

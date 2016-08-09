@@ -35,23 +35,13 @@ namespace matriz
                 for (int coluna = 0; coluna < 4; coluna++)
                 {
                     transposta[linha, coluna] = matriz[coluna, linha];
-                }
-            }
-            for (int linha = 0; linha < 3; linha++)
-            {
-                for (int coluna = 0; coluna < 4; coluna++)
-                {
                     Console.Write(transposta[linha, coluna] + "  ");
                 }
                 Console.WriteLine();
             }
-
-            
-                Console.ReadLine();
-            
-        }
            
-
-
+                Console.ReadLine();
+            }
+          
     }
 }

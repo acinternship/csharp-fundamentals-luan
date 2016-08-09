@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Test.Serveces;
 using Test.Entities;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Test
 {
@@ -33,9 +32,8 @@ namespace Test
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddEntityFramework()
-                    .AddSqlServer()
-                    .AddDbContext<TestDbContext>(options => options.UseSqlServer(Configuration["Datavase:connection"]))
+
+            services.AddDbContext<TestDbContext>(options => options.UseSqlServer(Configuration ["Database:connection"]));
 
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
@@ -59,11 +57,7 @@ namespace Test
 
             app.UseFileServer();
             app.UseMvc(ConfigureRoute);
-            app.Run(async (context) =>
-            {
-                var greeting = greeter.GetGreeting();
-                await context.Response.WriteAsync(greeting);
-            });
+           
 
         }
 

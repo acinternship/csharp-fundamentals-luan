@@ -9,20 +9,15 @@ namespace Blog.Controllers
 {
     public class PostController: Controller
     {
+        private BlogDbContext _dbContext;
 
-        private static List<BlogPost> _posts = new List<BlogPost>
+        public PostController(BlogDbContext dbContext)
         {
-            new BlogPost { Id = 1, Title = "Post1", CreatedAt = DateTime.Now,
-            Content = "Teste" },
-
-             new BlogPost { Id = 2, Title = "Post2", CreatedAt = DateTime.Now,
-            Content = "Teste2" }
-        };
-
-      
+            _dbContext = dbContext;
+        }       
         public IActionResult Index()
         {
-            return View(_posts);
+            return View(_dbContext.Posts.ToList());
 
         }
         [HttpGet]
@@ -35,8 +30,8 @@ namespace Blog.Controllers
         public IActionResult Create(BlogPost post)
         {
             post.CreatedAt = DateTime.Now;
-            _posts.Add(post);
-            
+            _dbContext.Add(post);
+            _dbContext.SaveChanges();
             return RedirectToAction("Index"); 
 
         }
@@ -44,22 +39,28 @@ namespace Blog.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var model = _posts.FirstOrDefault(p => p.Id == id);
+            var model = _dbContext.Posts.FirstOrDefault(p => p.Id == id);
             return View(model);
         }
+
         [HttpPost]
         public IActionResult Edit(BlogPost post)
         {
-            var model = _posts.FirstOrDefault (p => post.Id == post.Id);
+            var model = _dbContext.Posts.FirstOrDefault (p => p.Id == post.Id);
             model.Title = post.Title;
             model.Content = post.Content;
+            _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            _posts.RemoveAll(p => p.Id == id);
+            var model = _dbContext.Posts.FirstOrDefault(p => p.Id == id);
+
+            _dbContext.Posts.Remove(model);
+            _dbContext.SaveChanges();
             return RedirectToAction("Index");
+
 
         }
 
