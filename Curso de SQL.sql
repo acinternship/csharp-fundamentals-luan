@@ -1,0 +1,1 @@
+CREATE INDEX Departamento ON[dbo].Funcionarios (Departamento);
